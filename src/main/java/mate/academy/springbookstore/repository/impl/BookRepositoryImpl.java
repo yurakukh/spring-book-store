@@ -5,6 +5,7 @@ import mate.academy.springbookstore.model.Book;
 import mate.academy.springbookstore.repository.BookRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,13 +21,23 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book save(Book book) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
             session.persist(book);
-            session.getTransaction().commit();
+            transaction.commit();
             return book;
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new RuntimeException("Can't add book " + book, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
