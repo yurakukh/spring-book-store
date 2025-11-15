@@ -1,15 +1,13 @@
 package mate.academy.springbookstore;
 
+import java.math.BigDecimal;
 import mate.academy.springbookstore.model.Book;
-import mate.academy.springbookstore.repository.impl.BookRepositoryImpl;
 import mate.academy.springbookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.math.BigDecimal;
 
 @SpringBootApplication
 public class SpringBookStoreApplication {
