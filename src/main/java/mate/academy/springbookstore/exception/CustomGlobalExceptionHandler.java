@@ -34,15 +34,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, headers, HttpStatus.BAD_REQUEST);
     }
 
-    private String getErrorMessage(ObjectError error) {
-        String message = error.getDefaultMessage();
-        if (error instanceof FieldError fieldError) {
-            String field = fieldError.getField();
-            return field + ": " + message;
-        }
-        return message;
-    }
-
     public ResponseEntity<Object> handleEntityNotFoundException(
             EntityNotFoundException ex,
             WebRequest request
@@ -51,5 +42,14 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("timestamp", LocalDateTime.now());
         body.put("error", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    private String getErrorMessage(ObjectError error) {
+        String message = error.getDefaultMessage();
+        if (error instanceof FieldError fieldError) {
+            String field = fieldError.getField();
+            return field + ": " + message;
+        }
+        return message;
     }
 }
