@@ -1,6 +1,5 @@
 package mate.academy.springbookstore.service.impl;
 
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.springbookstore.dto.BookDto;
 import mate.academy.springbookstore.dto.CreateBookRequestDto;
@@ -9,6 +8,8 @@ import mate.academy.springbookstore.mapper.BookMapper;
 import mate.academy.springbookstore.model.Book;
 import mate.academy.springbookstore.repository.BookRepository;
 import mate.academy.springbookstore.service.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,11 +25,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> findAll() {
-        return bookRepository.findAll()
-                .stream()
-                .map(bookMapper::toDto)
-                .toList();
+    public Page<BookDto> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable)
+                .map(bookMapper::toDto);
     }
 
     @Override
