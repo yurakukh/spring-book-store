@@ -1,8 +1,8 @@
 package mate.academy.springbookstore.mapper;
 
 import mate.academy.springbookstore.config.MapperConfig;
-import mate.academy.springbookstore.dto.BookDto;
-import mate.academy.springbookstore.dto.CreateBookRequestDto;
+import mate.academy.springbookstore.dto.book.BookDto;
+import mate.academy.springbookstore.dto.book.CreateBookRequestDto;
 import mate.academy.springbookstore.model.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
