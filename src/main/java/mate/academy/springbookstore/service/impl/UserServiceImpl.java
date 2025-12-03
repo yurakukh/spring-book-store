@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
                     + " email already exists");
         }
         User user = userMapper.toModel(requestDto);
-        User savedUser = userRepository.save(user);
-        return userMapper.toDto(savedUser);
+        userRepository.save(user);
+        return userMapper.toDto(user);
     }
 }
