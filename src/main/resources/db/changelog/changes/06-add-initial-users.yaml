@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: 06-add-initial-users
+      author: yurii_kukharenko
+      comment: Insert 3 users with role USER and 1 user with role ADMIN. Passwords are bcrypt-encoded 'Password1!'
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: id, value: 1 }
+              - column: { name: first_name, value: Alice }
+              - column: { name: last_name, value: Johnson }
+              - column: { name: email, value: alice.j@example.com }
+              - column: { name: password, value: "$2y$10$Py55eMW8hKmlVXY9thO4S.teawC0IddVOu92JgkTSPi0ZnyPZHiTy" }
+              - column: { name: shipping_address, value: "123 Main St, Anytown" }
+
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: id, value: 2 }
+              - column: { name: first_name, value: Bob }
+              - column: { name: last_name, value: Smith }
+              - column: { name: email, value: bob.s@example.com }
+              - column: { name: password, value: "$2y$10$Py55eMW8hKmlVXY9thO4S.teawC0IddVOu92JgkTSPi0ZnyPZHiTy" }
+              - column: { name: shipping_address, value: "456 Oak Ave, Somewhere" }
+
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: id, value: 3 }
+              - column: { name: first_name, value: Charlie }
+              - column: { name: last_name, value: Brown }
+              - column: { name: email, value: charlie.b@example.com }
+              - column: { name: password, value: "$2y$10$Py55eMW8hKmlVXY9thO4S.teawC0IddVOu92JgkTSPi0ZnyPZHiTy" }
+              - column: { name: shipping_address, value: "789 Pine Ln, Nowhere" }
+
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: id, value: 4 }
+              - column: { name: first_name, value: Dana }
+              - column: { name: last_name, value: White }
+              - column: { name: email, value: admin.d@example.com }
+              - column: { name: password, value: "$2y$10$Py55eMW8hKmlVXY9thO4S.teawC0IddVOu92JgkTSPi0ZnyPZHiTy" }
+              - column: { name: shipping_address, value: "000 Admin HQ" }
+
+  - changeSet:
+      id: assign-roles-to-new-users
+      author: yurii_kukharenko
+      changes:
+        - insert:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: user_id
+                  valueComputed: "(SELECT id FROM users WHERE email='alice.j@example.com')"
+              - column:
+                  name: role_id
+                  valueComputed: "(SELECT id FROM roles WHERE name='USER')"
+        - insert:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: user_id
+                  valueComputed: "(SELECT id FROM users WHERE email='bob.s@example.com')"
+              - column:
+                  name: role_id
+                  valueComputed: "(SELECT id FROM roles WHERE name='USER')"
+        - insert:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: user_id
+                  valueComputed: "(SELECT id FROM users WHERE email='charlie.b@example.com')"
+              - column:
+                  name: role_id
+                  valueComputed: "(SELECT id FROM roles WHERE name='USER')"
+        - insert:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: user_id
+                  valueComputed: "(SELECT id FROM users WHERE email='admin.d@example.com')"
+              - column:
+                  name: role_id
+                  valueComputed: "(SELECT id FROM roles WHERE name='ADMIN')"
