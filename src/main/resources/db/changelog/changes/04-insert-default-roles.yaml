@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 02-insert-default-roles
+      author: yurii_kukharenko
+      runAlways: false
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column: {name: name, value: "USER"}
+        - insert:
+            tableName: roles
+            columns:
+              - column: {name: name, value: "ADMIN"}
