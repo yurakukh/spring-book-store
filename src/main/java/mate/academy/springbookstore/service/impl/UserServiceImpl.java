@@ -1,9 +1,11 @@
 package mate.academy.springbookstore.service.impl;
 
+import jakarta.transaction.Transactional;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mate.academy.springbookstore.dto.user.UserRegistrationRequestDto;
 import mate.academy.springbookstore.dto.user.UserResponseDto;
+import mate.academy.springbookstore.exception.EntityNotFoundException;
 import mate.academy.springbookstore.exception.RegistrationException;
 import mate.academy.springbookstore.mapper.UserMapper;
 import mate.academy.springbookstore.model.Role;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -32,7 +35,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Role defaultRole = roleRepository.findByName(Role.RoleName.USER)
-                .orElseThrow(() -> new RuntimeException("Can't find default role"));
+                .orElseThrow(() -> new EntityNotFoundException("Can't find "
+                        + Role.RoleName.USER + " role"));
         user.setRoles(Set.of(defaultRole));
 
         userRepository.save(user);
