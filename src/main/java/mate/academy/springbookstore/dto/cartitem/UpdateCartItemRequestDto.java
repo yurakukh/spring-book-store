@@ -1,0 +1,9 @@
+package mate.academy.springbookstore.dto.cartitem;
+
+import jakarta.validation.constraints.Min;
+
+public record UpdateCartItemRequestDto(
+        @Min(value = 1, message = "{cartitem.request.quantity.min}")
+        int quantity
+) {
+}
