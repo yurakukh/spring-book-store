@@ -1,12 +1,10 @@
 package mate.academy.springbookstore.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import mate.academy.springbookstore.dto.cartitem.CartItemResponseDto;
 import mate.academy.springbookstore.dto.cartitem.CreateCartItemRequestDto;
 import mate.academy.springbookstore.dto.cartitem.UpdateCartItemRequestDto;
 import mate.academy.springbookstore.dto.shoppingcart.ShoppingCartResponseDto;
 import mate.academy.springbookstore.exception.EntityNotFoundException;
-import mate.academy.springbookstore.mapper.CartItemMapper;
 import mate.academy.springbookstore.mapper.ShoppingCartMapper;
 import mate.academy.springbookstore.model.Book;
 import mate.academy.springbookstore.model.CartItem;
@@ -16,24 +14,25 @@ import mate.academy.springbookstore.repository.BookRepository;
 import mate.academy.springbookstore.repository.CartItemRepository;
 import mate.academy.springbookstore.repository.ShoppingCartRepository;
 import mate.academy.springbookstore.service.ShoppingCartService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     private final ShoppingCartRepository shoppingCartRepository;
     private final CartItemRepository cartItemRepository;
     private final ShoppingCartMapper shoppingCartMapper;
-    private final CartItemMapper cartItemMapper;
     private final BookRepository bookRepository;
 
     @Override
-    public Page<CartItemResponseDto> getCartItemsByUser(User user, Pageable pageable) {
-        return cartItemRepository.findByShoppingCartUserId(user.getId(), pageable)
-                .map(cartItemMapper::toDto);
+    public ShoppingCartResponseDto getShoppingCart(User user) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findByUserId(user.getId()).orElseThrow(
+                () -> new EntityNotFoundException("Can't find cart for user " + user.getId())
+        );
+        return shoppingCartMapper.toDto(shoppingCart);
     }
 
     @Override
@@ -64,7 +63,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public CartItemResponseDto updateCartItem(
+    public ShoppingCartResponseDto updateCartItem(
             Long cartItemId,
             UpdateCartItemRequestDto requestDto,
             User user
@@ -77,7 +76,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                         )
                 );
         cartItem.setQuantity(requestDto.quantity());
-        return cartItemMapper.toDto(cartItemRepository.save(cartItem));
+        return shoppingCartMapper.toDto(cartItem.getShoppingCart());
     }
 
     @Override
@@ -90,5 +89,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                         )
                 );
         cartItemRepository.delete(cartItem);
+    }
+
+    @Override
+    public void createShoppingCartForUser(User user) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUser(user);
+        shoppingCartRepository.save(shoppingCart);
     }
 }
