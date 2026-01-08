@@ -97,4 +97,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCart.setUser(user);
         shoppingCartRepository.save(shoppingCart);
     }
+
+    @Override
+    public ShoppingCartResponseDto clearShoppingCart(User user) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findByUserId(user.getId()).orElseThrow(
+                () -> new EntityNotFoundException("Can't find cart by user " + user.getId())
+        );
+        cartItemRepository.deleteAllByShoppingCartId(shoppingCart.getId());
+        shoppingCart.getCartItems().clear();
+        return shoppingCartMapper.toDto(shoppingCart);
+    }
 }
