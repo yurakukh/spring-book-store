@@ -14,10 +14,7 @@ COPY --from=builder /application/application/ ./
 
 RUN apk add --no-cache bash curl
 
-COPY wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
-
-ENTRYPOINT ["/wait-for-it.sh", "mysql:3306", "--", "java", "org.springframework.boot.loader.launch.JarLauncher"]
-EXPOSE 8080
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
+EXPOSE 8081
 
 
