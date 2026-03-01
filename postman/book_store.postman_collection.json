@@ -1,0 +1,806 @@
+{
+  "info": {
+    "_postman_id": "618daf2e-d7de-4f8d-a97c-b10de67396bf",
+    "name": "BOOK STORE",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "9745685",
+    "_collection_link": "https://go.postman.co/collection/9745685-618daf2e-d7de-4f8d-a97c-b10de67396bf?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "books",
+      "item": [
+        {
+          "name": "create books",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbi5kQGV4YW1wbGUuY29tIiwiaWF0IjoxNzY3NzMyMTM5LCJleHAiOjE3Njc3MzI0Mzl9.EtghiDsJ74395LNwRSM4ogho1g7xXxC6qnQtTrDGuk59q3OPFLI2bjy8YZ_rVNbG",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//   \"title\": \"Clean Code\",\r\n//   \"author\": \"Robert C. Martin\",\r\n//   \"isbn\": \"9780132350884\",\r\n//   \"price\": 42.99,\r\n//   \"description\": \"A handbook of agile software craftsmanship.\",\r\n//   \"coverImage\": \"https://example.com/clean-code.jpg\",\r\n//   \"categoryIds\": [1, 2]\r\n// }\r\n{\r\n  \"title\": \"Effective Java\",\r\n  \"author\": \"Joshua Bloch\",\r\n  \"isbn\": \"9780134685991\",\r\n  \"price\": 55.50,\r\n  \"description\": \"Best practices for writing high-quality Java code.\",\r\n  \"coverImage\": \"https://example.com/effective-java.jpg\",\r\n  \"categoryIds\": [1]\r\n}\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/books",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "books"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "time management",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update book",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbi5kQGV4YW1wbGUuY29tIiwiaWF0IjoxNzY3NzMyMjE3LCJleHAiOjE3Njc3MzI1MTd9.MpWW8jdFceUtbq20OOh0kGF6AOUFhEM_Cc5FGjRdxY_-o3NRJOJhT-BkO6xYbzlb",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Clean Code\",\r\n  \"author\": \"Robert C. Martin\",\r\n  \"isbn\": \"9780132350884\",\r\n  \"price\": 42.99,\r\n  \"description\": \"A handbook of agile software craftsmanship.\",\r\n  \"coverImage\": \"https://example.com/clean-code.jpg\",\r\n  \"categoryIds\": [1]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/books/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "books",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all books",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzczMjE3NiwiZXhwIjoxNzY3NzMyNDc2fQ.dx94WjXwZ8vxGUU6If_q51FqJNMCrRFyIv4_sM4D9jWX-6R30wnkJ-UbWKGgbPie",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/books",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "books"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete book",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/books/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "books",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "categories",
+      "item": [
+        {
+          "name": "create category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbi5kQGV4YW1wbGUuY29tIiwiaWF0IjoxNzY3NzMyMjE3LCJleHAiOjE3Njc3MzI1MTd9.MpWW8jdFceUtbq20OOh0kGF6AOUFhEM_Cc5FGjRdxY_-o3NRJOJhT-BkO6xYbzlb",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"name\":\"Non-fiction\",\r\n//     \"description\":\"For non fiction lowers\"\r\n// }\r\n// {\r\n//     \"name\": \"Science\",\r\n//     \"description\": \"Books about science and technology\"\r\n// }\r\n{\r\n    \"name\": \"History\",\r\n    \"description\": \"Books covering historical events and biographies\"\r\n}\r\n// {\r\n//     \"name\": \"Self-help\",\r\n//     \"description\": \"Books focused on personal development and motivation\"\r\n// }\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all categories",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbi5kQGV4YW1wbGUuY29tIiwiaWF0IjoxNzY3NzMyMjE3LCJleHAiOjE3Njc3MzI1MTd9.MpWW8jdFceUtbq20OOh0kGF6AOUFhEM_Cc5FGjRdxY_-o3NRJOJhT-BkO6xYbzlb",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/categories",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhbGljZS5qQGV4YW1wbGUuY29tIiwiaWF0IjoxNzY1NjI1NjA3LCJleHAiOjE3NjU2MjU5MDd9.-5VzlIifdpbagNomdLJzMPbio-1Z61Wfyu94n10LEtBzcNdtZUSOpRM4kHfMaWG2",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/categories/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbi5kQGV4YW1wbGUuY29tIiwiaWF0IjoxNzY1NjI1NzEyLCJleHAiOjE3NjU2MjYwMTJ9.k6FPBj3E0_Lxw1qCAEo0CfpfydF49G5wXrXwpODtcldSfqFbZsyMZHiZZWl1sUkM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"name\":\"Non-fiction\",\r\n//     \"description\":\"For non fiction lowers\"\r\n// }\r\n// {\r\n//     \"name\": \"Science\",\r\n//     \"description\": \"Books about science and technology\"\r\n// }\r\n{\r\n    \"name\": \"MATH\",\r\n    \"description\": \"for mathematician\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "categories",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbi5kQGV4YW1wbGUuY29tIiwiaWF0IjoxNzY1NjI1NzEyLCJleHAiOjE3NjU2MjYwMTJ9.k6FPBj3E0_Lxw1qCAEo0CfpfydF49G5wXrXwpODtcldSfqFbZsyMZHiZZWl1sUkM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"name\":\"Non-fiction\",\r\n//     \"description\":\"For non fiction lowers\"\r\n// }\r\n// {\r\n//     \"name\": \"Science\",\r\n//     \"description\": \"Books about science and technology\"\r\n// }\r\n{\r\n    \"name\": \"History\",\r\n    \"description\": \"Books covering historical events and biographies\"\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "categories",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get books by category",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhbGljZS5qQGV4YW1wbGUuY29tIiwiaWF0IjoxNzY1NjI3MjY3LCJleHAiOjE3NjU2Mjc1Njd9.TaqwRa4YCnwQLc-XWGxQSmizIr46-nAQlT3umb9p-LqJuKvN2uCPkjOJ-U3UX57r",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories/5/books",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "categories",
+                "5",
+                "books"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "orders",
+      "item": [
+        {
+          "name": "get orders",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzczMjgxMywiZXhwIjoxNzY3NzMzMTEzfQ.Ie7wKIVTmuXXFXjsijtZD4seI7A4NT_8zDeyiAJSZy6iZs6R8t9aXZEYZi-ovw5S",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "place order",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzczMjM4NywiZXhwIjoxNzY3NzMyNjg3fQ.wQiB__HVnW9mMj--wUS8RCwKIycs2-G-Bs4DRqRq1fXxhwWK4V-fTzhhYWTOnWhn",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"shippingAddress\":\"Shevchenka st. 10\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get order items",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzczMjM4NywiZXhwIjoxNzY3NzMyNjg3fQ.wQiB__HVnW9mMj--wUS8RCwKIycs2-G-Bs4DRqRq1fXxhwWK4V-fTzhhYWTOnWhn",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/orders/1/items",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "orders",
+                "1",
+                "items"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get 1 order item",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzczMjcxMSwiZXhwIjoxNzY3NzMzMDExfQ.Hz5ckwd2dRfjWfRFG_59602Kvc6Yvbq-RNVCeGqxl9WKLBI15-UB3FvQOy2-diMm",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/orders/1/items/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "orders",
+                "1",
+                "items",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzczMjgxMywiZXhwIjoxNzY3NzMzMTEzfQ.Ie7wKIVTmuXXFXjsijtZD4seI7A4NT_8zDeyiAJSZy6iZs6R8t9aXZEYZi-ovw5S",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\":\"DELIVERED\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/orders/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "orders",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "shopping carts",
+      "item": [
+        {
+          "name": "get cart by user",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzczMjM4NywiZXhwIjoxNzY3NzMyNjg3fQ.wQiB__HVnW9mMj--wUS8RCwKIycs2-G-Bs4DRqRq1fXxhwWK4V-fTzhhYWTOnWhn",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/cart",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "cart"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "2",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "0",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "bookTitle,desc",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add book to cart",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzczMjM4NywiZXhwIjoxNzY3NzMyNjg3fQ.wQiB__HVnW9mMj--wUS8RCwKIycs2-G-Bs4DRqRq1fXxhwWK4V-fTzhhYWTOnWhn",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"bookId\": 2,\r\n    \"quantity\": 10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/cart",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "cart"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update cart",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzQ2NTg3NiwiZXhwIjoxNzY3NDY2MTc2fQ.zeZ3qdmQ7OPPNypoiTRS5lV_icyckwi9DlIjLKXeE0s1EAuEQxSd8RTo7vz10l-1",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"quantity\": 77\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/cart/items/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "cart",
+                "items",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete book from cart",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2Iuc0BleGFtcGxlLmNvbSIsImlhdCI6MTc2NzQ2NTg3NiwiZXhwIjoxNzY3NDY2MTc2fQ.zeZ3qdmQ7OPPNypoiTRS5lV_icyckwi9DlIjLKXeE0s1EAuEQxSd8RTo7vz10l-1",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/cart/items/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "cart",
+                "items",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "register user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstName\": \"Bob\",\r\n    \"lastName\": \"Johnson\",\r\n    \"email\": \"bob@test.net\",\r\n    \"password\": \"Qwerty123!\",\r\n    \"repeatPassword\": \"Qwerty123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/registration",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "registration"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin.d@example.com\",\r\n    \"password\": \"Password1!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
